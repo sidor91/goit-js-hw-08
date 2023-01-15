@@ -46,3 +46,5 @@ function onGalleryItemClick(e) {
     lightbox.open(e.target.parentNode);
 
 }
+
+// ----------------------------------------------------------------
