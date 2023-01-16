@@ -1,40 +1,31 @@
 const throttle = require('lodash.throttle');
 
-const emailField = document.querySelector('input');
-const messageField = document.querySelector('textarea');
+const emailField = document.querySelector('.feedback-form input');
+const messageField = document.querySelector('.feedback-form textarea');
 const submitForm = document.querySelector('.feedback-form');
 
-emailField.addEventListener('input', throttle(onEmailInput, 500));
-messageField.addEventListener('input', throttle(onMessageInput, 500));
+
+submitForm.addEventListener('input', throttle(submitFormInput, 500));
 submitForm.addEventListener('submit', onSubmit);
 
 
 let userData = { email: "", message: "", };
 
 
-updateFormFields()
+updateFormFields();
 
 
 function updateFormFields() {
     if (localStorage.getItem("feedback-form-state")) {
         const savedSettings = JSON.parse(localStorage.getItem("feedback-form-state"));
-        const savedEmail = savedSettings.email;
-        const savedMessage = savedSettings.message;
-        emailField.value = savedEmail;
-        messageField.value = savedMessage;
+        emailField.value = savedSettings.email;
+        messageField.value = savedSettings.message;
     }
 }
 
-
-function onEmailInput(e) {
-    userData.email = e.target.value;
-    localStorage.setItem("feedback-form-state", JSON.stringify(userData));
-    
-}
-
-
-function onMessageInput(e) {
-    userData.message = e.target.value;
+function submitFormInput(e) {
+    userData.email = emailField.value
+    userData.message = messageField.value;
     localStorage.setItem("feedback-form-state", JSON.stringify(userData));
 }
 
