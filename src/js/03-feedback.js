@@ -9,7 +9,7 @@ submitForm.addEventListener('input', throttle(submitFormInput, 500));
 submitForm.addEventListener('submit', onSubmit);
 
 
-let userData = { email: "", message: "", };
+
 
 
 updateFormFields();
@@ -24,6 +24,7 @@ function updateFormFields() {
 }
 
 function submitFormInput(e) {
+    let userData = { email: "", message: "", };
     userData.email = emailField.value
     userData.message = messageField.value;
     localStorage.setItem("feedback-form-state", JSON.stringify(userData));
@@ -32,8 +33,8 @@ function submitFormInput(e) {
 
 function onSubmit(e) {
     e.preventDefault();
+    console.log(JSON.parse(localStorage.getItem("feedback-form-state")));
     submitForm.reset();
-    console.log(userData);
     localStorage.removeItem("feedback-form-state");
 }
 
