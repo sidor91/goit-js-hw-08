@@ -19,8 +19,10 @@ const player = new Player(iframe);
     };
 player.on('timeupdate', throttle(onTimeUpdate, 1000))
  
+if (localStorage.getItem("videoplayer-current-time")) {
+    player.setCurrentTime(localStorage.getItem("videoplayer-current-time"));
+}
 
-player.setCurrentTime(localStorage.getItem("videoplayer-current-time"));
 
 
 
